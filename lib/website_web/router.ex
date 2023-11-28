@@ -1,5 +1,7 @@
 defmodule WebsiteWeb.Router do
   use WebsiteWeb, :router
+  use Beacon.LiveAdmin.Router
+  use Beacon.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -8,6 +10,7 @@ defmodule WebsiteWeb.Router do
     plug :put_root_layout, html: {WebsiteWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Beacon.LiveAdmin.Plug
   end
 
   pipeline :api do
@@ -42,7 +45,10 @@ defmodule WebsiteWeb.Router do
     end
   end
 
-  use Beacon.Router
+  scope "/admin" do
+    pipe_through :browser
+    beacon_live_admin "/"
+  end
 
   scope "/" do
     pipe_through :browser

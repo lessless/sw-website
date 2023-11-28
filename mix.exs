@@ -51,7 +51,8 @@ defmodule Website.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
-      {:beacon, github: "BeaconCMS/beacon", override: true}
+      {:beacon, github: "BeaconCMS/beacon", override: true},
+      {:beacon_live_admin, github: "BeaconCMS/beacon_live_admin"}
     ]
   end
 
@@ -64,7 +65,12 @@ defmodule Website.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs", "run priv/repo/beacon_seeds.exs"],
+      "ecto.setup": [
+        "ecto.create",
+        "ecto.migrate",
+        "run priv/repo/seeds.exs",
+        "run priv/repo/beacon_seeds.exs"
+      ],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
