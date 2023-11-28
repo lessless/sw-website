@@ -17,8 +17,9 @@ defmodule Website.Application do
       # Start a worker by calling: Website.Worker.start_link(arg)
       # {Website.Worker, arg},
       # Start to serve requests, typically the last entry
-      WebsiteWeb.Endpoint
-    ]
+      WebsiteWeb.Endpoint,
+     {Beacon, sites: [[site: :website, endpoint: WebsiteWeb.Endpoint, data_source: Website.BeaconDataSource]]}
+]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

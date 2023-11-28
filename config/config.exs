@@ -8,17 +8,14 @@
 import Config
 
 config :website,
-  ecto_repos: [Website.Repo],
+  ecto_repos: [Website.Repo, Beacon.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
 config :website, WebsiteWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
-  render_errors: [
-    formats: [html: WebsiteWeb.ErrorHTML, json: WebsiteWeb.ErrorJSON],
-    layout: false
-  ],
+  render_errors: [formats: [html: BeaconWeb.ErrorHTML]],
   pubsub_server: Website.PubSub,
   live_view: [signing_salt: "mBajFVAK"]
 
